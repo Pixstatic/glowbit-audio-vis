@@ -17,7 +17,7 @@ Download the Latest Release
 
 Upload `main.py` to Raspberry Pi Pico (requires `glowbit` and `micropython_ssd1306` packages) using Thonny
 
-Make sure Python 3.9 or later is installed (I use Python 3.9.6) or use Thonny's Python
+Make sure Python 3.9 is installed locally
 
 Install all packages from `requirements.txt`
 
