@@ -1,2 +1,24 @@
-# glowbit-audio-vis
-MicroPython code for showing an audio spectrum on a glowbit 8x8 matrix
+# Glowbit Audio Visualiser
+MicroPython Program for Raspberry Pi Pico that displays an audio spectrum on a Glowbit 8x8 Matrix.
+
+## Setup
+
+### Windows
+
+Download the Latest Release
+
+Upload `main.py` to Raspberry Pi Pico (requires `glowbit` and `micropython_ssd1306` packages)
+
+Run `av_windows.exe` on your PC
+
+### Other OS
+
+Download the Latest Release
+
+Upload `main.py` to Raspberry Pi Pico (requires `glowbit` and `micropython_ssd1306` packages) using Thonny
+
+Make sure Python 3.9 or later is installed (I use Python 3.9.6) or use Thonny's Python
+
+Install all packages from `requirements.txt`
+
+Run `av_main.py` through Python
