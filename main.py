@@ -6,23 +6,17 @@ import glowbit
 import math
 
 
-#buttonPin = 16
+matrix = glowbit.matrix8x8(rateLimitFPS = 60) #initialize Glowbit Matrix
 
-#button = Pin(buttonPin,Pin.IN,Pin.PULL_UP)
+charWidth = 8 #pixel width of a single character on the OLED Display
 
-
-
-matrix = glowbit.matrix8x8(rateLimitFPS = 60)
-
-charWidth = 8
-
-maxChars = math.floor(128/charWidth)
+maxChars = math.floor(128/charWidth) #calculate maximum characters able to be displayed on a single row of the display
 
 
-i2c=I2C(0,sda=Pin(0), scl=Pin(1), freq=400000)
-oled = SSD1306_I2C(128, 64, i2c)
+i2c=I2C(0,sda=Pin(0), scl=Pin(1), freq=400000) #create i2c connection to OLED
+oled = SSD1306_I2C(128, 64, i2c) #initialize OLED Display
 
-try:
+try: #Check if OLED is connected, and show text if it is
     oled.text("Connect To PC",0,0)
     oled.show()
     oledexists = True
@@ -30,18 +24,18 @@ except:
     oledexists = False
 
 
-def addTextMultiline(text,y,charLimit):
+def addTextMultiline(text,y,charLimit): #function for showing text across multiple lines
     
     t = list(text)
     for i in range(0,math.ceil(len(t)/maxChars)):
         oled.text(''.join(t[j] for j in range(i*maxChars,min(i*maxChars+maxChars,len(t))) if j < charLimit),0,i*9+y)
 
 
-frame = 0
+frame = 0 
 
-frameUpdated = 0
+frameUpdated = 0 #the last frame that the text on the display was updated
 
-songTitle = ""
+songTitle = "" #buffered song title
 
 while True:
     # read a command from the host
@@ -54,23 +48,14 @@ while True:
         mc = frame - frameUpdated if (int(vsplit[3]) == 1) else 999
         #oled.text(vsplit[2],0,16)
         
-        if (vsplit[2] != songTitle):
+        if (vsplit[2] != songTitle): #check if song name has been updated (for typeout effect)
             songTitle = vsplit[2]
-            frameUpdated = frame
+            frameUpdated = frame 
         
-        
-        if oledexists:
+        if oledexists: #update OLED Display if it is connected
             addTextMultiline(vsplit[2],16,mc)
-            
-            
             addTextMultiline(vsplit[1],4,min(maxChars,mc))
-            
-            
             oled.show()
-        
-        #cs = vsplit[3].split(',')
-        
-        #c = matrix.rgbColour(int(cs[0]),int(cs[1]),int(cs[2]))
         
         ss = vsplit[0].split(',')
         
@@ -80,12 +65,9 @@ while True:
                 
                 matrix.pixelSetXY(x,y,c if (8-y) < int(ss[x]) else matrix.black())
         
-        #if (button.value()):
-        #    matrix.pixelsFill(matrix.white())
-        
         matrix.pixelsShow()
         frame += 1
-             
+        
                 
                 
                 
