@@ -45,7 +45,6 @@ while True:
     # perform the requested action
     if v.lower():
         vsplit = v.split('`')
-        oled.fill(0)
         mc = frame - frameUpdated if (int(vsplit[3]) == 1) else 999
         #oled.text(vsplit[2],0,16)
         
@@ -54,6 +53,8 @@ while True:
             frameUpdated = frame 
         
         if oledexists: #update OLED Display if it is connected
+            oled.fill(0)
+
             addTextMultiline(vsplit[2],16,mc)
             addTextMultiline(vsplit[1],4,min(maxChars,mc))
             oled.show()
