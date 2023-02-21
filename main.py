@@ -13,10 +13,11 @@ charWidth = 8 #pixel width of a single character on the OLED Display
 maxChars = math.floor(128/charWidth) #calculate maximum characters able to be displayed on a single row of the display
 
 
-i2c=I2C(0,sda=Pin(0), scl=Pin(1), freq=400000) #create i2c connection to OLED
-oled = SSD1306_I2C(128, 64, i2c) #initialize OLED Display
 
 try: #Check if OLED is connected, and show text if it is
+    i2c=I2C(0,sda=Pin(0), scl=Pin(1), freq=400000) #create i2c connection to OLED
+    oled = SSD1306_I2C(128, 64, i2c) #initialize OLED Display
+
     oled.text("Connect To PC",0,0)
     oled.show()
     oledexists = True
