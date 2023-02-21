@@ -39,11 +39,10 @@ frameUpdated = 0 #the last frame that the text on the display was updated
 songTitle = "" #buffered song title
 
 while True:
-    # read a command from the host
+    # read data
     v = sys.stdin.readline().strip()
 
-    # perform the requested action
-    if v.lower():
+    if v.lower(): #check if data received
         vsplit = v.split('`')
         mc = frame - frameUpdated if (int(vsplit[3]) == 1) else 999
         #oled.text(vsplit[2],0,16)
